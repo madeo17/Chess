@@ -10,6 +10,10 @@ class Square:
         self.rect = pygame.Rect(0, 0, SQUARE_SIZE, SQUARE_SIZE)
         self.rect.center = (x, y)
         self.is_white = is_white
+        self.left = None
+        self.right = None
+        self.up = None
+        self.down = None
 
     def draw(self, surface):
         color = WHITE if self.is_white else GREEN
