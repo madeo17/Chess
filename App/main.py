@@ -1,13 +1,18 @@
 import pygame
 from chessboard import Chessboard
+from bishop import Bishop
 
 
 pygame.init()
 screen = pygame.display.set_mode((1200, 800))
 pygame.display.set_caption("Chess")
 
-chessboard = Chessboard()
-chessboard.draw(screen)
+chessboard = Chessboard(screen)
+chessboard.draw()
+
+# initialize one bishop for testing
+chessboard.board[4][4].put_piece(Bishop())
+
 pygame.display.flip()
 
 game_on = True

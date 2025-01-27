@@ -5,15 +5,17 @@ SQUARES_RANGE = range(8)
 
 
 class Chessboard:
-    def __init__(self):
+    def __init__(self, screen):
         self.board = []
+        self.screen = screen
+        Square.screen = screen
         self.__init_board()
         self.__init_connections_between_squares()
 
-    def draw(self, screen):
+    def draw(self):
         for rank in self.board:
             for square in rank:
-                square.draw(screen)
+                square.draw()
 
     def __init_board(self):
         is_white = True
