@@ -22,6 +22,10 @@ while game_on:
         if event.type == pygame.QUIT:
             game_on = False
 
-    # pygame.display.flip()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = pygame.mouse.get_pos()
+            chessboard.handle_click(x, y)
+
+            pygame.display.flip()
 
 pygame.quit()

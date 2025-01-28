@@ -21,5 +21,8 @@ class Bishop:
     def is_same_side(self, is_white):
         return self.is_white == is_white
 
-    def get_possible_dest(self, current_square):
-        return current_square.get_upper_left_diagonal(self.is_white)
+    def get_possible_destinations(self, current_square):
+        return (current_square.get_upper_left_diagonal(self.is_white)
+                + current_square.get_upper_right_diagonal(self.is_white)
+                + current_square.get_lower_left_diagonal(self.is_white)
+                + current_square.get_lower_right_diagonal(self.is_white))
