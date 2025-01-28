@@ -1,6 +1,6 @@
 import pygame
 from chessboard import Chessboard
-from bishop import Bishop
+from pieces.bishop import Bishop
 
 
 pygame.init()
@@ -11,7 +11,7 @@ chessboard = Chessboard(screen)
 chessboard.draw()
 
 # initialize one bishop for testing
-chessboard.board[4][4].put_piece(Bishop())
+chessboard.board[4][4].put_piece(Bishop(True))
 
 pygame.display.flip()
 
