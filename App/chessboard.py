@@ -10,7 +10,7 @@ class Chessboard:
         self.board = []
         self.screen = Square.screen = screen
         self.__init_board()
-        self.__init_connections_between_squares()
+        self.__init_squares_neighbors()
         self.square_with_piece_ready_to_move = None
 
     def __init_board(self):
@@ -29,13 +29,13 @@ class Chessboard:
             is_white = not is_white
             y += shift
 
-    def __init_connections_between_squares(self):
+    def __init_squares_neighbors(self):
         for i, rank in enumerate(self.board):
             for j, square in enumerate(rank):
-                square.left = rank[j - 1] if j - 1 in SQUARES_RANGE else None
-                square.right = rank[j + 1] if j + 1 in SQUARES_RANGE else None
-                square.up = self.board[i - 1][j] if i - 1 in SQUARES_RANGE else None
-                square.down = self.board[i + 1][j] if i + 1 in SQUARES_RANGE else None
+                square.neighbor["left"] = rank[j - 1] if j - 1 in SQUARES_RANGE else None
+                square.neighbor["right"] = rank[j + 1] if j + 1 in SQUARES_RANGE else None
+                square.neighbor["up"] = self.board[i - 1][j] if i - 1 in SQUARES_RANGE else None
+                square.neighbor["down"] = self.board[i + 1][j] if i + 1 in SQUARES_RANGE else None
 
     def draw(self):
         for rank in self.board:

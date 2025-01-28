@@ -13,10 +13,7 @@ class Square:
         self.rect = pygame.Rect(0, 0, SQUARE_SIZE, SQUARE_SIZE)
         self.rect.center = (x, y)
         self.is_white = is_white
-        self.left = None
-        self.right = None
-        self.up = None
-        self.down = None
+        self.neighbor = {"left": None, "up": None, "right": None, "down": None}
         self.piece = None
         self.highlight = False
 
@@ -40,54 +37,6 @@ class Square:
     def has_piece(self) -> bool:
         return self.piece is not None
 
-    def get_upper_left_diagonal(self, is_piece_white) -> list:
-        if self.left and (next_square := self.left.up):
-            if not next_square.has_piece():
-                return [next_square] + next_square.get_upper_left_diagonal(is_piece_white)
-            else:
-                if next_square.piece.is_same_side(is_piece_white):
-                    return []
-                else:
-                    return [next_square]
-        else:
-            return []
-
-    def get_upper_right_diagonal(self, is_piece_white) -> list:
-        if self.right and (next_square := self.right.up):
-            if not next_square.has_piece():
-                return [next_square] + next_square.get_upper_right_diagonal(is_piece_white)
-            else:
-                if next_square.piece.is_same_side(is_piece_white):
-                    return []
-                else:
-                    return [next_square]
-        else:
-            return []
-
-    def get_lower_left_diagonal(self, is_piece_white) -> list:
-        if self.left and (next_square := self.left.down):
-            if not next_square.has_piece():
-                return [next_square] + next_square.get_lower_left_diagonal(is_piece_white)
-            else:
-                if next_square.piece.is_same_side(is_piece_white):
-                    return []
-                else:
-                    return [next_square]
-        else:
-            return []
-
-    def get_lower_right_diagonal(self, is_piece_white) -> list:
-        if self.right and (next_square := self.right.down):
-            if not next_square.has_piece():
-                return [next_square] + next_square.get_lower_right_diagonal(is_piece_white)
-            else:
-                if next_square.piece.is_same_side(is_piece_white):
-                    return []
-                else:
-                    return [next_square]
-        else:
-            return []
-
     def switch_highlight(self, enable: bool):
         self.highlight = enable
         self.draw()
@@ -98,6 +47,7 @@ class Square:
     def get_possible_destinations(self):
         if self.piece:
             return self.piece.get_possible_destinations(self)
+        return None
 
     def move_piece(self, target_square):
         target_square.put_piece(self.piece)
