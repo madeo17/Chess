@@ -1,6 +1,7 @@
 import pygame
 from chessboard import Chessboard
 from pieces.bishop import Bishop
+from pieces.pawn import Pawn
 
 
 pygame.init()
@@ -10,8 +11,9 @@ pygame.display.set_caption("Chess")
 chessboard = Chessboard(screen)
 chessboard.draw()
 
-# initialize one bishop for testing
+# initialize some pieces for testing
 chessboard.board[4][4].put_piece(Bishop(True))
+chessboard.board[1][3].put_piece(Pawn(False))
 
 pygame.display.flip()
 
@@ -22,7 +24,7 @@ while game_on:
         if event.type == pygame.QUIT:
             game_on = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        elif event.type == pygame.MOUSEBUTTONDOWN:
             x, y = pygame.mouse.get_pos()
             chessboard.handle_click(x, y)
 

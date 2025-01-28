@@ -51,5 +51,6 @@ class Square:
 
     def move_piece(self, target_square):
         target_square.put_piece(self.piece)
+        self.piece.moved = True
         self.piece = None
         self.draw()

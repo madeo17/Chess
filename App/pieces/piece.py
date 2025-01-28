@@ -11,6 +11,7 @@ class Piece:
         self.image = pygame.transform.scale(self.image, IMAGE_SIZE)
         self.rect = self.image.get_rect()
         self.is_white = is_white
+        self.moved = False
 
     def get_image(self):
         return self.image
@@ -21,8 +22,8 @@ class Piece:
     def draw(self, surface):
         surface.blit(self.image, self.rect.topleft)
 
-    def is_same_side(self, is_white):
-        return self.is_white == is_white
+    def is_same_side(self, piece):
+        return self.is_white == piece.is_white
 
-    def get_possible_destinations(self, current_square):
-        pass
+    def get_possible_destinations(self, current_square) -> list:
+        return []

@@ -55,12 +55,14 @@ class Chessboard:
 
 
     def handle_click(self, x, y):
-        square = self.get_clicked_square(x, y)
+        if not (square := self.get_clicked_square(x, y)):
+            return
         if self.square_with_piece_ready_to_move and square.is_highlighted():
             self.square_with_piece_ready_to_move.move_piece(square)
             self.square_with_piece_ready_to_move = None
             self.turn_off_highlight_on_all_squares()
         elif square.has_piece():
+            self.turn_off_highlight_on_all_squares()
             possible_destinations = square.get_possible_destinations()
             if possible_destinations:
                 switch_highlight_on_squares(enable=True, squares=possible_destinations)

@@ -1,7 +1,5 @@
 from .piece import Piece
 
-IMAGE_SIZE = (226 * 0.24, 270 * 0.24)
-
 class Bishop(Piece):
     def __init__(self, is_white: bool):
         super().__init__("bishop", is_white)
@@ -18,7 +16,7 @@ class Bishop(Piece):
             if not next_square.has_piece():
                 return [next_square] + self.get_diagonal(next_square, horizontal, vertical)
             else:
-                if next_square.piece.is_same_side(self.is_white):
+                if next_square.piece.is_same_side(self):
                     return []
                 else:
                     return [next_square]
