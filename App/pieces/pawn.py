@@ -1,9 +1,9 @@
 from .piece import Piece
 
+
 class Pawn(Piece):
     def __init__(self, is_white: bool):
         super().__init__("pawn", is_white)
-
 
     def get_possible_destinations(self, current_square):
         direction = "up" if self.is_white else "down"

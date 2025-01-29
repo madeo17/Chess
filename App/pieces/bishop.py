@@ -1,12 +1,13 @@
 from .piece import Piece
 
+
 class Bishop(Piece):
     def __init__(self, is_white: bool):
         super().__init__("bishop", is_white)
 
     def get_diagonal(self, square, horizontal: str, vertical: str) -> list:
         """
-        Get diagonal with possible destinations
+        Get diagonal from a given direction with possible destinations
         :param square: starting square
         :param horizontal: left or right
         :param vertical: up or down
@@ -18,10 +19,8 @@ class Bishop(Piece):
             else:
                 if next_square.piece.is_same_side(self):
                     return []
-                else:
-                    return [next_square]
-        else:
-            return []
+                return [next_square]
+        return []
 
     def get_possible_destinations(self, current_square):
         result = []

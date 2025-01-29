@@ -24,7 +24,6 @@ class Square:
             pygame.draw.rect(Square.screen, HIGHLIGHT_COLOR, self.rect)
         if self.piece:
             self.piece.draw(Square.screen)
-            # Square.screen.blit(self.piece.get_image(), self.rect.center)
 
     def switch_color(self):
         self.is_white = not self.is_white
