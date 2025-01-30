@@ -33,5 +33,27 @@ class Piece:
     def is_same_side(self, piece):
         return self.is_white == piece.is_white
 
-    def get_possible_destinations(self, current_square) -> list:
+    def is_square_available(self, square) -> bool:
+        """
+        Check if square is empty or with opponent piece.
+        """
+        if not square:
+            return False
+        if square.has_piece():
+            return not square.piece.is_same_side(self)
+        return True
+
+    def get_line_of_possible_squares(self, square, direction: str) -> list:
+        """
+        Get line of squares on a given direction with possible destinations.
+        """
+        next_square = square(direction)
+        if self.is_square_available(next_square):
+            return [next_square] + self.get_line_of_possible_squares(next_square, direction)
         return []
+
+    def get_possible_destinations(self, current_square) -> list:
+        """
+        Must be implemented by concrete pieces.
+        """
+        pass

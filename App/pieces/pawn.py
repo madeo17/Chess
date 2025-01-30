@@ -1,4 +1,4 @@
-from .piece import Piece
+from App.pieces.piece import Piece
 
 
 class Pawn(Piece):
@@ -9,16 +9,17 @@ class Pawn(Piece):
         direction = "up" if self.is_white else "down"
         result = []
 
-        if forward_square := current_square.neighbor[direction]:
-            if not forward_square.has_piece():
-                result.append(forward_square)
-                if not self.moved:
-                    if further_square := forward_square.neighbor[direction]:
-                        if not further_square.has_piece():
-                            result.append(further_square)
-            for attack_direction in ("left", "right"):
-                square = forward_square.neighbor[attack_direction]
-                if square.has_piece() and not square.piece.is_same_side(self):
-                    result.append(square)
+        forward_square = current_square(direction)
+        # no need to check if square exist because will never get to the edge (promotion)
+        if not forward_square.has_piece():
+            result.append(forward_square)
+            if not self.moved:
+                further_square = forward_square(direction)
+                if further_square and not further_square.has_piece():
+                    result.append(further_square)
+        for attack_direction in ("left", "right"):
+            square = forward_square(attack_direction)
+            if square.has_piece() and not square.piece.is_same_side(self):
+                result.append(square)
 
         return result

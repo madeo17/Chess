@@ -4,6 +4,7 @@ SQUARE_SIZE = 80
 GREEN = (105, 130, 90)
 WHITE = (245, 250, 210)
 HIGHLIGHT_COLOR = (250, 250, 80)
+DIRECTIONS = ("left", "up_left", "up", "up_right", "right", "down_right", "down", "down_left")
 
 
 class Square:
@@ -13,7 +14,7 @@ class Square:
         self.rect = pygame.Rect(0, 0, SQUARE_SIZE, SQUARE_SIZE)
         self.rect.center = (x, y)
         self.is_white = is_white
-        self.neighbor = {"left": None, "up": None, "right": None, "down": None}
+        self.neighbor = {direction: None for direction in DIRECTIONS}
         self.piece = None
         self.highlight = False
 
@@ -53,3 +54,6 @@ class Square:
         self.piece.moved = True
         self.piece = None
         self.draw()
+
+    def __call__(self, direction: str):
+        return self.neighbor[direction]

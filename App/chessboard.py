@@ -32,10 +32,22 @@ class Chessboard:
     def __init_squares_neighbors(self):
         for i, rank in enumerate(self.board):
             for j, square in enumerate(rank):
-                square.neighbor["left"] = rank[j - 1] if j - 1 in SQUARES_RANGE else None
-                square.neighbor["right"] = rank[j + 1] if j + 1 in SQUARES_RANGE else None
-                square.neighbor["up"] = self.board[i - 1][j] if i - 1 in SQUARES_RANGE else None
-                square.neighbor["down"] = self.board[i + 1][j] if i + 1 in SQUARES_RANGE else None
+                if j - 1 in SQUARES_RANGE:
+                    square.neighbor["left"] = rank[j - 1]
+                    if i - 1 in SQUARES_RANGE:
+                        square.neighbor["up_left"] = self.board[i - 1][j - 1]
+                    if i + 1 in SQUARES_RANGE:
+                        square.neighbor["down_left"] = self.board[i + 1][j - 1]
+                if j + 1 in SQUARES_RANGE:
+                    square.neighbor["right"] = rank[j + 1]
+                    if i - 1 in SQUARES_RANGE:
+                        square.neighbor["up_right"] = self.board[i - 1][j + 1]
+                    if i + 1 in SQUARES_RANGE:
+                        square.neighbor["down_right"] = self.board[i + 1][j + 1]
+                if i - 1 in SQUARES_RANGE:
+                    square.neighbor["up"] = self.board[i - 1][j]
+                if i + 1 in SQUARES_RANGE:
+                    square.neighbor["down"] = self.board[i + 1][j]
 
     def draw(self):
         for rank in self.board:
@@ -53,14 +65,16 @@ class Chessboard:
         for rank in self.board:
             switch_highlight_on_squares(enable=False, squares=rank)
 
+    def move_ready_piece(self, target_square):
+        self.square_with_piece_ready_to_move.move_piece(target_square)
+        self.square_with_piece_ready_to_move = None
+        self.turn_off_highlight_on_all_squares()
 
     def handle_click(self, x, y):
         if not (square := self.get_clicked_square(x, y)):
             return
         if self.square_with_piece_ready_to_move and square.is_highlighted():
-            self.square_with_piece_ready_to_move.move_piece(square)
-            self.square_with_piece_ready_to_move = None
-            self.turn_off_highlight_on_all_squares()
+            self.move_ready_piece(square)
         elif square.has_piece():
             self.turn_off_highlight_on_all_squares()
             possible_destinations = square.get_possible_destinations()
