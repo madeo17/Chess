@@ -1,9 +1,12 @@
 import pygame
+
 from chessboard import Chessboard
 from pieces.bishop import Bishop
 from pieces.pawn import Pawn
 from pieces.rook import Rook
 from pieces.king import King
+from pieces.knight import Knight
+from pieces.queen import Queen
 
 
 pygame.init()
@@ -18,6 +21,8 @@ chessboard.board[4][4].put_piece(Bishop(True))
 chessboard.board[1][3].put_piece(Pawn(False))
 chessboard.board[6][6].put_piece(Rook(True))
 chessboard.board[0][5].put_piece(King(False))
+chessboard.board[6][2].put_piece(Knight(True))
+chessboard.board[3][0].put_piece(Queen(False))
 
 pygame.display.flip()
 
