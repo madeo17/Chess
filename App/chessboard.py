@@ -1,8 +1,19 @@
 from square import Square, SQUARE_SIZE
 from utils import switch_highlight_on_squares
+from pieces.pawn import Pawn
+from pieces.bishop import Bishop
+from pieces.knight import Knight
+from pieces.rook import Rook
+from pieces.queen import Queen
+from pieces.king import King
+
 
 INITIAL_COORD = 100
 SQUARES_RANGE = range(8)
+WHITE_PAWNS_RANK_IDX = 6
+BLACK_PAWNS_RANK_IDX = 1
+WHITE_NON_PAWNS_RANK_IDX = 7
+BLACK_NON_PAWNS_RANK_IDX = 0
 
 
 class Chessboard:
@@ -53,6 +64,21 @@ class Chessboard:
         for rank in self.board:
             for square in rank:
                 square.draw()
+
+    def init_pawns(self, is_white: bool):
+        rank_idx = WHITE_PAWNS_RANK_IDX if is_white else BLACK_PAWNS_RANK_IDX
+        for square in self.board[rank_idx]:
+            square.put_piece(Pawn(is_white))
+
+    def init_major_minor_pieces(self, is_white:bool):
+        rank_idx = WHITE_NON_PAWNS_RANK_IDX if is_white else BLACK_NON_PAWNS_RANK_IDX
+        for i, piece in enumerate((Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook)):
+            self.board[rank_idx][i].put_piece(piece(is_white))
+
+    def init_all_pieces(self):
+        for is_white in (True, False):
+            self.init_pawns(is_white)
+            self.init_major_minor_pieces(is_white)
 
     def get_clicked_square(self, x, y):
         for rank in self.board:
