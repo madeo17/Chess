@@ -1,4 +1,4 @@
 
-def switch_highlight_on_squares(enable: bool, squares: list):
+def switch_squares_target_state(enable: bool, squares: list):
     for square in squares:
-        square.switch_highlight(enable)
+        square.switch_target_state(enable)

@@ -1,14 +1,12 @@
 import pygame
 
-from chessboard import Chessboard
+from App.chessboard import Chessboard
 
 pygame.init()
-screen = pygame.display.set_mode((1200, 800))
+screen = pygame.display.set_mode((1200, 1200))
 pygame.display.set_caption("Chess")
 
 chessboard = Chessboard(screen)
-chessboard.draw()
-
 chessboard.init_all_pieces()
 
 pygame.display.flip()

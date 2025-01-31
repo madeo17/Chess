@@ -52,8 +52,8 @@ class Piece:
             return [next_square] + self.get_line_of_possible_squares(next_square, direction)
         return []
 
-    def get_possible_destinations(self, current_square) -> list:
+    def target_squares(self, current_square) -> bool:
         """
-        Must be implemented by concrete pieces.
+        Implemented by concrete pieces.
         """
         pass
