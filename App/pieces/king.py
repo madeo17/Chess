@@ -30,7 +30,7 @@ class King(Piece):
 
         for direction in ALL_DIRECTIONS:
             square = current_square(direction)
-            if self.is_square_available(square):
+            if self.is_square_accessible(square):
                 square.switch_target_state(True)
                 is_any_targeted = True
 

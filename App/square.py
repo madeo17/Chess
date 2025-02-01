@@ -55,11 +55,6 @@ class Square:
         elif action:
             self.action_on_move = action
 
-    def get_possible_destinations(self):
-        if self.piece:
-            return self.piece.get_possible_destinations(self)
-        return None
-
     def move_piece(self, target_square):
         target_square.put_piece(self.piece)
         self.piece.moved = True

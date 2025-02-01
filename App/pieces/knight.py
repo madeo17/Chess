@@ -13,7 +13,7 @@ class Knight(Piece):
                 if second_square := square(direction):
                     for turn in ("up", "down"):
                         destination_square = second_square(turn)
-                        if self.is_square_available(destination_square):
+                        if self.is_square_accessible(destination_square):
                             destination_square.switch_target_state(True)
                             is_any_targeted = True
 
@@ -22,7 +22,7 @@ class Knight(Piece):
                 if second_square := square(direction):
                     for turn in ("left", "right"):
                         destination_square = second_square(turn)
-                        if self.is_square_available(destination_square):
+                        if self.is_square_accessible(destination_square):
                             destination_square.switch_target_state(True)
                             is_any_targeted = True
 
