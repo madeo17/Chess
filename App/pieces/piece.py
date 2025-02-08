@@ -40,7 +40,7 @@ class Piece:
         if not square:
             return False
         if square.has_piece():
-            return not square.piece.is_same_side(self)
+            return not self.is_same_side(square.piece)
         return True
 
     def get_line_of_possible_squares(self, square, direction: str) -> list:

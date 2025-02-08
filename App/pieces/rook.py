@@ -1,6 +1,5 @@
 from App.pieces.piece import Piece
-
-STRAIGHT_DIRECTIONS = ("left", "up", "right", "down")
+from App.square import STRAIGHT_DIRECTIONS
 
 
 class Rook(Piece):

@@ -1,5 +1,4 @@
-from App.square import Square, SQUARE_SIZE
-from App.utils import switch_squares_target_state
+from App.square import Square, SQUARE_SIZE, switch_squares_target_state
 from App.pieces.pawn import Pawn
 from App.pieces.bishop import Bishop
 from App.pieces.knight import Knight

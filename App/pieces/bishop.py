@@ -1,6 +1,5 @@
 from App.pieces.piece import Piece
-
-DIAGONAL_DIRECTIONS = ("up_left", "up_right", "down_right", "down_left")
+from App.square import DIAGONAL_DIRECTIONS
 
 
 class Bishop(Piece):

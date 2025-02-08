@@ -5,6 +5,8 @@ GREEN = (105, 130, 90)
 WHITE = (245, 250, 210)
 HIGHLIGHT_COLOR = (250, 250, 80)
 ALL_DIRECTIONS = ("left", "up_left", "up", "up_right", "right", "down_right", "down", "down_left")
+DIAGONAL_DIRECTIONS = ("up_left", "up_right", "down_right", "down_left")
+STRAIGHT_DIRECTIONS = ("left", "up", "right", "down")
 
 
 class Square:
@@ -29,9 +31,6 @@ class Square:
             pygame.draw.rect(Square.screen, HIGHLIGHT_COLOR, self.rect)
         if self.piece:
             self.piece.draw(Square.screen)
-
-    def switch_color(self):
-        self.is_white = not self.is_white
 
     def perform_additional_action_on_move(self):
         if self.action_on_move:
@@ -60,3 +59,8 @@ class Square:
         self.piece.moved = True
         self.piece = None
         self.draw()
+
+
+def switch_squares_target_state(enable: bool, squares: list):
+    for square in squares:
+        square.switch_target_state(enable)
