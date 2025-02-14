@@ -21,6 +21,9 @@ class Square:
         self.is_targeted = False
         self.action_on_move = None
 
+        self.is_en_passant = False
+        self.is_this_turn_en_passant = False
+
     def __call__(self, direction: str):
         return self.neighbor[direction]
 
@@ -60,7 +63,26 @@ class Square:
         self.piece = None
         self.draw()
 
+    def remove_piece(self):
+        self.piece = None
+        self.draw()
+
+    def mark_en_passant(self):
+        self.is_en_passant = True
+        self.is_this_turn_en_passant = True
+
+    def update_en_passant_status(self):
+        if self.is_en_passant:
+            if self.is_this_turn_en_passant:
+                self.is_this_turn_en_passant = False
+            else:
+                self.is_en_passant = False
+
 
 def switch_squares_target_state(enable: bool, squares: list):
     for square in squares:
         square.switch_target_state(enable)
+
+def update_en_passant_squares(squares: list):
+    for square in squares:
+        square.update_en_passant_status()

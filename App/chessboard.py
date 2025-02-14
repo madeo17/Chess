@@ -1,4 +1,4 @@
-from App.square import Square, SQUARE_SIZE, switch_squares_target_state
+from App.square import Square, SQUARE_SIZE, switch_squares_target_state, update_en_passant_squares
 from App.pieces.pawn import Pawn
 from App.pieces.bishop import Bishop
 from App.pieces.knight import Knight
@@ -93,6 +93,10 @@ class Chessboard:
         for rank in self.board:
             switch_squares_target_state(enable=False, squares=rank)
 
+    def update_all_en_passant_squares(self):
+        for rank in self.board:
+            update_en_passant_squares(squares=rank)
+
     def move_ready_piece(self, target_square):
         self.square_with_piece_ready_to_move.move_piece(target_square)
         self.square_with_piece_ready_to_move = None
@@ -104,6 +108,7 @@ class Chessboard:
             return
         if square.is_targeted:
             self.move_ready_piece(square)
+            self.update_all_en_passant_squares()
         else:
             self.reset_all_target_squares()
             if square.has_piece() and self.white_to_move == square.piece.is_white:
